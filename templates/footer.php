@@ -1,7 +1,6 @@
-<!-- footer -->
 <footer>
     <div class="text-center ">
-        <p class="my-5 text-sm">
+        <p class="mb-5 mt-10 text-sm text-gray-400">
             &copy; Copyright 2023 Contact Tracing Form
         </p>
     </div>
