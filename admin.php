@@ -12,34 +12,23 @@ if (!isset($_SESSION['email'])) {
 }
 
 // Database Connection
+include('config/db_connect.php');
 
-$servername = 'localhost';
-$username = 'shaun';
-$password = 'test1234';
-$dbname = 'contact_tracing_form';
+// Make SQL query
+$query = 'SELECT user_id, fullname, complete_address, phone_number, diagnose, show_symphtoms, created_at FROM tracing_records ORDER BY created_at';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// store results
+$result = mysqli_query($conn, $query);
 
-if (!$conn) {
-    echo "Connection error: " . mysqli_connect_error();
-} else {
+// fetch the resulting
+$records = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    // Data Test
-    $sql = "SELECT * FROM tracing_records";
-    $result = mysqli_query($conn, $sql);
+// sanitize results
+mysqli_free_result($result);
 
-    if ($result) {
-        // fetch the data and print it
-        while ($row = mysqli_fetch_assoc($result)) {
-            print_r($row);
-        }
-    } else {
-        // handle the error
-        echo "Error executing query: " . mysqli_error($conn);
-    }
+// close connection
+mysqli_close($conn);
 
-    mysqli_free_result($result);
-}
 
 ?>
 
@@ -73,10 +62,10 @@ if (!$conn) {
     <!-- main container -->
     <div class="container w-11/12 lg:w-9/12 mx-auto min-h-screen">
 
-        <div class="p-8 bg-white my-10">
-            <table class="table-auto w-full text-center border">
+        <div class="p-8 bg-white my-10 rounded">
+            <table class="table-auto w-full text-center border rounded">
                 <thead>
-                    <tr class="border text-gray-600">
+                    <tr class="border text-white bg-blue-500">
                         <th class="border">ID</th>
                         <th class="border py-2">FULLNAME</th>
                         <th class="border py-2">ADDRESS</th>
@@ -87,25 +76,32 @@ if (!$conn) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-gray-500">
-                        <td class="py-2 border">1</td>
-                        <td class="py-2 border">Juan Dela Cruz</td>
-                        <td class="py-2 border">New York City</td>
-                        <td class="py-2 border">09123456789</td>
-                        <td class="py-2 border">No</td>
-                        <td class="py-2 border">No</td>
-                        <td class="py-2 border">01/01/2022</td>
-                    </tr>
-
-                    <tr class="text-gray-600 bg-gray-100">
-                        <td class="py-2 border">2</td>
-                        <td class="py-2 border">Juan Dela Cruz</td>
-                        <td class="py-2 border">New York City</td>
-                        <td class="py-2 border">09123456789</td>
-                        <td class="py-2 border">No</td>
-                        <td class="py-2 border">No</td>
-                        <td class="py-2 border">01/01/2022</td>
-                    </tr>
+                    <!-- loop through each record -->
+                    <?php foreach ($records as $record) : ?>
+                        <tr class="text-gray-500">
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['user_id']); ?>
+                            </td>
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['fullname']); ?>
+                            </td>
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['complete_address']); ?>
+                            </td>
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['phone_number']); ?>
+                            </td>
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['diagnose']); ?>
+                            </td>
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['show_symphtoms']); ?>
+                            </td>
+                            <td class="py-2 border">
+                                <?php echo htmlspecialchars($record['created_at']); ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
 
                 </tbody>
             </table>
