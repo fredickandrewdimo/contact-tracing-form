@@ -3,7 +3,10 @@
 // FORM VALIDATION
 include('config/secure_input.php');
 
-$errors = array('fullname' => '', 'phone_number' => '', 'address' => '', 'diagnose' => '', 'show_symphtoms' => '',);
+// DATABASE CONNECTION
+include('config/db_connect.php');
+
+$errors = array('fullname' => '', 'phone_number' => '', 'address' => '', 'diagnose' => '', 'show_symphtoms' => '');
 
 $fullname = $phone_number = $address = "";
 $diagnose = $show_symphtoms = 'No';
@@ -14,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST["fullname"])) {
         $errors['fullname'] = 'Fullname is required';
     } else {
-        $fullname = $_POST["fullname"];
+        $fullname = test_input($_POST["fullname"]);
         if (!preg_match('/^[a-zA-Z\s]+$/', $fullname)) {
             $errors['fullname'] = 'Title must be letters and spaces only';
         }
@@ -24,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST["phone_number"])) {
         $errors['phone_number'] = 'Phone number is required';
     } else {
-        $phone_number = $_POST["phone_number"];
+        $phone_number = test_input($_POST["phone_number"]);
         if (!preg_match('/^09\d{9}$/', $phone_number)) {
             $errors['phone_number'] = 'Must be 11 digits starting with 09 and contain only numbers.';
         }
@@ -34,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST["address"])) {
         $errors['address'] = 'Address is required';
     } else {
-        $address = $_POST["address"];
+        $address = test_input($_POST["address"]);
         if (!preg_match('/^[a-zA-Z\s]+$/', $address)) {
             $errors['address'] = 'Address must only have letters, commas, periods, and spaces.';
         }
@@ -48,6 +51,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // check show symptoms
     if (isset($_POST['show_symphtoms'])) {
         $show_symphtoms = 'Yes';
+    }
+
+    if (array_filter($errors)) {
+        // 
+    } else {
+        $fullname = mysqli_real_escape_string($conn, $_POST["fullname"]);
+
+        $phone_number = mysqli_real_escape_string($conn, $_POST["phone_number"]);
+
+        $address = mysqli_real_escape_string($conn, $_POST["address"]);
+
+        $diagnose = mysqli_real_escape_string($conn, $_POST["diagnose"]);
+
+        $show_symphtoms = mysqli_real_escape_string($conn, $_POST["show_symphtoms"]);
+
+        // sql query
+        $query = "INSERT INTO tracing_records(fullname, phone_number, complete_address, diagnose, show_symphtoms) VALUES('$fullname', '$phone_number', '$address', '$diagnose', '$show_symphtoms')";
+
+        // save to db and check
+        if (mysqli_query($conn, $query)) {
+            // success
+        } else {
+            // error
+            echo "query error: " . mysqli_error($conn);
+        }
+
+        header('Location: submitted.php');
     }
 }
 
@@ -92,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="w-full mt-4 mb-2">
                 <label for="" class="text-gray-600">FULLNAME
-                    <span class="text-gray-500">(ex. Juan Dela Cruz)</span>
+                    <span class="text-gray-500 text-sm">(ex. Juan Dela Cruz)</span>
                 </label><br />
                 <!-- fullname -->
                 <input name="fullname" value="<?php echo $fullname; ?>" type="text" class="border-2 w-full mt-2 rounded py-2 px-2 border-gray-200">
@@ -102,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="w-full mt-4 mb-2">
                 <label for="" class="text-gray-600">PHONE NUMBER
-                    <span class="text-gray-500">(ex. 09123456789)</span>
+                    <span class="text-gray-500 text-sm">(ex. 09123456789)</span>
                 </label><br />
                 <!-- phone number -->
                 <input value="<?php echo $phone_number; ?>" name="phone_number" type="text" class="border-2 w-full mt-2 rounded py-2 px-2 border-gray-200">
@@ -112,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="w-full mt-4 mb-2">
                 <label for="" class="text-gray-600">ADDRESS
-                    <span class="text-gray-500">(brgy/city/province/country)</span>
+                    <span class="text-gray-500 text-sm">(brgy/city/province/country)</span>
                 </label><br />
                 <!-- address -->
                 <input value="<?php echo $address; ?>" name="address" type="text" class="border-2 w-full mt-2 rounded py-2 px-2 border-gray-200">
@@ -121,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <div class="w-full my-4">
-                <p class="mb-3 text-gray-700">Please select an option that applies to your situation</p>
+                <p class="mb-3 text-gray-700 text-sm">Please select the applicable option. You may leave the field blank if it does not apply.</p>
                 <!-- selection -->
                 <div class="">
                     <div class="flex mr-4 text-gray-500 mb-2">
