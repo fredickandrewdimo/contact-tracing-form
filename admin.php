@@ -31,7 +31,7 @@
             <h1 class="font-bold text-xl text-gray-700">CONTACT TRACING DATABASE</h1>
         </div>
         <div class="">
-            <a class="text-base text-gray-500" href="">LOGOUT</a>
+            <a class="text-base text-gray-500" href="login.php">LOGOUT</a>
         </div>
     </nav>
 
