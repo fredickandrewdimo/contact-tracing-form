@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) == 1) {
+            // User exists, store session variables
+            $_SESSION['email'] = $email;
 
             // Redirect to a protected page
             header('Location: admin.php');
@@ -78,20 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Title -->
     <title>Login Page</title>
+
 </head>
 
 <body class="font-sans bg-gray-100">
 
     <!-- navigation bar -->
-    <nav class="w-11/12 lg:w-4/12 mx-auto flex items-center justify-between py-4 mb-2">
-        <div class="">
-            <a class="font-bold text-xl text-gray-700" href="">TraceKeeper</a>
-        </div>
-        <div class="">
-            <a class="text-lg text-gray-600" href="index.php">Back</a>
-        </div>
-    </nav>
+    <?php include('templates/header_login.php'); ?>
 
     <!-- main container -->
     <div class="container w-11/12 lg:w-4/12 mx-auto min-h-full flex items-center justify-center">
@@ -100,7 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- form -->
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="p-10 bg-white rounded mx-auto mt-20 mb-8">
             <h1 class="text-center font-bold text-2xl text-gray-700 mb-4">Welcome back, Admin!</h1>
-            <p class="text-gray-600 mb-4 text-center text-sm ">We recommend checking ad managing your database frequently to ensure the best performance for your site.</p>
+            <p class="text-gray-600 mb-4 text-center text-sm ">
+                We recommend checking ad managing your database frequently to ensure the best performance for your site.
+            </p>
 
             <hr class="my-5">
 
@@ -109,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <span class="text-gray-500 text-sm">(ex. you@gmail.com)</span>
                 </label><br />
                 <input name="email" type="text" value="<?php echo $email; ?>" class="border-2 w-full mt-2 rounded py-2 px-2 border-gray-200">
+
                 <!-- error message -->
                 <span class="text-sm text-red-500"><?php echo $errors['email']; ?></span>
             </div>
