@@ -21,11 +21,11 @@
 </head>
 
 <body class="font-sans bg-gray-100">
+
+    <!-- navigation bar -->
+    <?php include('templates/header.php') ?>
     <!-- main container -->
     <div class="container w-11/12 lg:w-9/12 mx-auto">
-
-        <!-- navigation bar -->
-        <?php include('templates/header.php') ?>
 
         <!-- form -->
         <form action="" method="" class="p-10 bg-white rounded lg:w-6/12 mx-auto">
@@ -77,9 +77,10 @@
 
         </form>
 
-        <!-- footer -->
-        <?php include('templates/footer.php') ?>
     </div>
+
+    <!-- footer -->
+    <?php include('templates/footer.php') ?>
 
 </body>
 
