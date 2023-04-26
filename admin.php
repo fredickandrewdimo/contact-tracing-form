@@ -78,7 +78,7 @@ mysqli_close($conn);
                 <tbody>
                     <!-- loop through each record -->
                     <?php foreach ($records as $record) : ?>
-                        <tr class="text-gray-500">
+                        <tr class="text-gray-500 text-sm">
                             <td class="py-2 border">
                                 <?php echo htmlspecialchars($record['user_id']); ?>
                             </td>
