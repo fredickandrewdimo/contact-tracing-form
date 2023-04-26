@@ -1,39 +1,20 @@
-# contact-tracing-form
-
-### Screenschots:
-
-### Description:
-
-### Tech Stack:
-
-### Live link:
-
-### NPM Packages:
-
 # TraceKeeper
 
 TraceKeeper is a web application designed for contact tracing that allows users to submit forms, store data in a database, and view responses on an admin page. The application was created using a combination of front-end technologies, including HTML, CSS, and TailwindCSS, along with back-end technologies such as PHP and MySQL for data storage and retrieval.
 <br/>
 
-## Live URL
-
-<br/>
-
 ## Tech Stack
 
-**Frontend:** <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" style="padding-right:5px; padding-left:5px" />HTML , <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" style="padding-right:5px; padding-left:5px" />CSS , <img align="center" alt="HTML" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" style="padding-right:5px; padding-left:5px" />Tailwind CSS, <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" style="padding-right:5px; padding-left:5px" />PHP , <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" style="padding-right:5px; padding-left:5px" />MySQL
+**Frontend:** <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" style="padding-right:5px; padding-left:5px" />HTML , <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" style="padding-right:5px; padding-left:5px" />CSS , <img align="center" alt="HTML" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" style="padding-right:5px; padding-left:5px" />Tailwind CSS
+
+**Backend:** <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" style="padding-right:5px; padding-left:5px" />PHP , <img align="center" alt="REACT" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" style="padding-right:5px; padding-left:5px" />MySQL
 <br/>
 
 ## Screenshots
 
-![App Screenshot](https://github.com/fredickandrewdimo/shortly-react/blob/main/src/assets/shortly-desktop.png)
-
-<br/>
-
-## Lessons Learned
-
-Through this project, I gained knowledge and experience in using React, including using state management with the useState hook and implementing React Router. Additionally, I learned how to export data from other files and make responsive designs using Tailwind CSS. Finally, I also learned how to deploy a Vite React project to Github Pages using Github Actions.
-
+![Form Screenshot](https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/form-page.png)
+![Login Screenshot](https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/login-page.png)
+![Admin Screenshot](https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/admin-page.png)
 <br/>
 
 ## Run Locally
@@ -41,13 +22,14 @@ Through this project, I gained knowledge and experience in using React, includin
 Clone the project
 
 ```bash
-  git clone https://github.com/fredickandrewdimo/shortly-react.git
+  git clone git@github.com:fredickandrewdimo/contact-tracing-form.git
+
 ```
 
-Go to the project directory
+Navigate to the project directory:
 
 ```bash
-  cd shortly-react
+  cd contact-tracing-form
 ```
 
 Install dependencies
@@ -56,10 +38,16 @@ Install dependencies
   npm install
 ```
 
-Start the server
+Start TailwindCSS:
 
 ```bash
-  npm run dev
+  npx tailwindcss -i input.css -o style.css --watch
 ```
+
+Install XAMPP to run the application's local server. You can download it [here](https://www.apachefriends.org/download.html).
+
+Once XAMPP is installed, start both the Apache and MySQL servers.
+
+Open your browser and navigate to localhost, then select the contracing form directory to access the application.
 
 <br/>
