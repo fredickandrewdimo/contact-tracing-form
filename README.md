@@ -12,9 +12,12 @@ TraceKeeper is a web application designed for contact tracing that allows users 
 
 ## Screenshots
 
-![Form Screenshot](https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/form-page.png)
-![Login Screenshot](https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/login-page.png)
-![Admin Screenshot](https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/admin-page.png)
+<img src="https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/form-page.png" alt="Form Screenshot" width="400" height="300"><br/>
+
+<img src="https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/login-page.png" alt="Login Screenshot" width="400" height="300"><br/>
+
+<img src="https://github.com/fredickandrewdimo/contact-tracing-form/blob/main/assets/admin-page.png" alt="Admin Screenshot" width="400" height="300"><br/>
+
 <br/>
 
 ## Run Locally
